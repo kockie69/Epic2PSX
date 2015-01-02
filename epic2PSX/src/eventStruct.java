@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import com.sun.jna.Structure;
@@ -40,8 +39,8 @@ import com.sun.jna.Structure;
 			public  class ByReference extends eventStruct implements Structure.ByReference {
 
 				@Override
-				protected List getFieldOrder() {
-					// TODO Auto-generated method stub
+				protected List<String> getFieldOrder() {
+
 					return Arrays.asList(new String[] { "nextRec", "cmd", "data" });
 				}
 				
@@ -49,15 +48,15 @@ import com.sun.jna.Structure;
 			public class ByValue extends eventStruct implements Structure.ByValue {
 
 				@Override
-				protected List getFieldOrder() {
-					// TODO Auto-generated method stub
+				protected List<String> getFieldOrder() {
+
 					return Arrays.asList(new String[] { "nextRec", "cmd", "data" });
 				}
 				
 			}
 			@Override
-			protected List getFieldOrder() {
-				// TODO Auto-generated method stub
+			protected List<String> getFieldOrder() {
+
 				return Arrays.asList(new String[] { "nextRec", "cmd", "data" });
 			};
 		}

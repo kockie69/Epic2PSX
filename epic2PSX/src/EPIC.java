@@ -220,8 +220,8 @@ public class EPIC
 		
 		mappings.readAll();
 
-	    if (OpenEPICDevice(1,20)!=-1) {
-//		if (OpenEPICDevice(1,20)!=9999) {
+//	    if (OpenEPICDevice(1,20)!=-1) {
+		if (OpenEPICDevice(1,20)!=9999) {
 	    	String host = defaultProps.getProperty("host");
 	    	int port = Integer.parseInt(defaultProps.getProperty("port"));
 		

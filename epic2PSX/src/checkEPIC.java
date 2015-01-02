@@ -1,9 +1,6 @@
 import java.util.TimerTask;
 
 
-import com.sun.jna.Native;
-
-
 // *************************************************
 		// Get analogs and events 
 		//  Here every timer tick
@@ -22,7 +19,7 @@ import com.sun.jna.Native;
 		
 		eventPtr.nextRec = 0;
 		char[] scrapBuffer;
-		char[] analogs = null;
+//		char[] analogs = null;
 		
 //		IntByReference analogsPtr = new IntByReference();
 		
