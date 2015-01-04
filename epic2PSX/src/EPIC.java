@@ -5,6 +5,7 @@ import java.util.*;
 
 import com.sun.jna.*;
 import com.sun.jna.win32.*;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public class EPIC
 {
@@ -211,7 +212,7 @@ public class EPIC
 	public static void main(String[] args) throws IOException {
 
 		String fileName="src/EPIC2PSX.ini";
-    	
+    	boolean succesfulStart = true;
     	Properties defaultProps = new Properties();
     	FileInputStream in = new FileInputStream(fileName);
     	defaultProps.load(in);
@@ -219,20 +220,22 @@ public class EPIC
 		options.put(Library.OPTION_FUNCTION_MAPPER ,new StdCallFunctionMapper());	
 		
 		mappings.readAll();
-
-//	    if (OpenEPICDevice(1,20)!=-1) {
-		if (OpenEPICDevice(1,20)!=9999) {
-	    	String host = defaultProps.getProperty("host");
-	    	int port = Integer.parseInt(defaultProps.getProperty("port"));
+		if (defaultProps.getProperty("epic").equals("true")) {
+		// Epic is connected so open a device
+			System.out.println("Configuration says Epic is connected");
+			if (OpenEPICDevice(1,20)==-1) {
+				succesfulStart = false;
+			}
+		}
+		if (succesfulStart) {
+			String host = defaultProps.getProperty("host");
+			int port = Integer.parseInt(defaultProps.getProperty("port"));
 		
-	    	netThread = new NetThread(host, port);
-	    	netThread.start();
+			netThread = new NetThread(host, port);
+			netThread.start();
 //				} else {
 //				if (netThread != null)
-//						netThread.finalJobs();
-
-	
-
+//						netThread.finalJobs();	
 	    }
 	    //epicIOdll.INSTANCE.__CloseEPIC(1);
 	}
