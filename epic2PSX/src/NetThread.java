@@ -143,16 +143,15 @@ class NetThread extends Thread {
 
 										if (!map.equals("")){
 											System.out.println("Map: " + map);
-											intVal = Byte.parseByte(message.substring(parseMark).trim());
-										
+											intVal = Integer.parseInt(message.substring(parseMark).trim());
+											System.out.println("intVal: " + intVal);
 											String sbNoo = new String(map);
 											int position = sbNoo.indexOf(",")+4;
 											int length = sbNoo.length()-1;
 											sbNoo=sbNoo.substring(position,length);				 			
 										int PHnumb = Integer.parseInt(sbNoo);
 										byte[] data = ByteBuffer.allocate(4).putInt(intVal).array();
-										System.out.println("sendPHInt(" + PHnumb + ","+ data[0] +  ","+ data[1] + ","+ data[2] + ","+ data[3] + ")" );
-
+								
 										EPIC.epicIOdll.INSTANCE.__SendPH(EPIC.handle,PHnumb,data[0],data[1],data[2],data[3]);
 
 										System.out.println("sendPHInt(" + EPIC.handle + "," + PHnumb + "," + data[0] + "," + data[1] + "," + data[2] + "," + data[3] + ")");
