@@ -90,7 +90,7 @@ public class EPIC
 	{
 		
 	  // epicIOdll INSTANCE = (epicIOdll)Native.loadLibrary("EPICIO",epicIOdll.class, options); 
-	epicIOdll INSTANCE = (epicIOdll)Native.loadLibrary("C:/WINDOWS/SYSTEM32/EPICIO.DLL",epicIOdll.class,options);
+	epicIOdll INSTANCE = (epicIOdll)Native.loadLibrary("C:/Windows/SysWOW64/EPICIO.DLL",epicIOdll.class,options);
 		 //epicIOdll INSTANCE = (epicIOdll)Native.loadLibrary("C:/WINDOWS/SYSWOW64/EPICIO.DLL",epicIOdll.class,options);    		
 			
 	   public int __OpenEPIC(int EPICid,int destID);
@@ -99,7 +99,7 @@ public class EPIC
 	   
 	   public int __GetAnalogs(int userHandle,char[] analogs);
 	   
-	   public int __GetEvent(int handle,eventStruct eventPtr);
+	   public int __GetEvent(int userHandle,eventStruct eventPtr);
 	   
 	   public int __SendQP(int userHandle,int Qpnumb);
 	   
@@ -114,7 +114,7 @@ public class EPIC
 	   
 	   public int __RequestDeviceData(int userHandle,int deviceNumber);
 	   
-	   public int __GetProjName(int userHandle, char[] infoBuffer);
+	   public int __GetProjName(int userHandle, byte[] infoBuffer);
 	}
 
 	public static void SendPH(int handle, int PH, short value1, short value2)
@@ -152,7 +152,7 @@ public class EPIC
 			   scrapBuffer = str.toCharArray();
 
 			   System.out.println(scrapBuffer);
-			   break;
+			   //break;
 		   	case ERR_NODEVICE:
 				switch(epicDevice){
 					case 0:
@@ -179,10 +179,11 @@ public class EPIC
 //		System.out.println("SwitchData: " + switchData[0]);
 
 	//EPIC.epicIOdll.INSTANCE.__RequestDeviceData(EPIC.handle,10);
-		char[] projectName = new char[64];
-		//EPIC.epicIOdll.INSTANCE.__GetProjName(handle, projectName);
+		byte[] projectName = new byte[64];
+//		String projectName = "";
+		EPIC.epicIOdll.INSTANCE.__GetProjName(handle, projectName);
 
-		System.out.println("ProjectName: " + projectName[0] + projectName[1] + projectName[2]);
+		System.out.println("ProjectName: " + (char)projectName[0] + (char)projectName[1] + (char)projectName[2]);
 		if (timer1ID == -1)  
 			{
 			Timer timer = new Timer();
@@ -195,7 +196,7 @@ public class EPIC
 			System.out.println(scrapBuffer);
 		}
 		else {
-			str = "EPICUSB" + (epicDevice - 1) + "destID=" + destID +",handle=" + handle;
+			str = "EPICUSB" + (epicDevice - 1) + " destID=" + destID +",handle=" + handle;
 			scrapBuffer = str.toCharArray();
 			System.out.println(scrapBuffer);
 	 		}

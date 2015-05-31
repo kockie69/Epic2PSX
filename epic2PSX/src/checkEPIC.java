@@ -19,6 +19,7 @@ import java.util.TimerTask;
 		
 		eventPtr.nextRec = 0;
 		char[] scrapBuffer;
+
 //		char[] analogs = null;
 		
 //		IntByReference analogsPtr = new IntByReference();
@@ -33,12 +34,15 @@ import java.util.TimerTask;
 			//nqw32(cmd,data16,data16,destID);
 			//events from devices with options(SEND_BUTTON_DLL);  use GetDeviceData to request a device's events
 			// 
-		
-		while(EPIC.epicIOdll.INSTANCE.__GetEvent(EPIC.handle,eventPtr) >= 0)
+//		System.out.println("Vlak voor GetEvent");
+//		System.out.println("EPIc.handle: " + EPIC.handle );
+//		System.out.println(EPIC.epicIOdll.INSTANCE.__GetEvent(EPIC.handle,eventPtr));
+		while(EPIC.epicIOdll.INSTANCE.__GetEvent(EPIC.handle,eventPtr)==0)
 		{
 			String str = "cmd = " + eventPtr.cmd + ",Eventnr = " + eventPtr.data[0] +",data= " + (eventPtr.data[1]+(256*eventPtr.data[2]));
 			scrapBuffer = str.toCharArray();
 			System.out.println(scrapBuffer);
+			System.out.println("In de while van GetEvent");	
 			switch (eventPtr.cmd)
 			 {
 			 	case	(byte) EPIC.EVENT16_0 :				//NQW(0-255,data16)

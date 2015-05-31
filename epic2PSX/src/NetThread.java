@@ -109,7 +109,7 @@ class NetThread extends Thread {
 													System.out.println("Lengte: " + valStr1.length());
 													if (valStr1.length() == 6) {
 														PHnumb=5;
-														val1 = (short) (Integer.parseInt(valStr1) /10);
+														val1 = (short) (Integer.parseInt(valStr1)/10);
 													} else {
 														PHnumb=4;
 														val1 = (short) (Integer.parseInt(valStr1));
